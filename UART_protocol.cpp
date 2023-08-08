@@ -87,7 +87,6 @@ inline namespace UARTprotocol{
 
         if(src_data[itr_b]==0xFF&&src_data[itr_e]==0x00){
             dec_size = (BUF_SIZE + itr_e - itr_b - 3)%BUF_SIZE;
-            std::cout<<"dc"<<dec_size<<std::endl;
             int mark_f = src_data[itr_b+1]-2;
             int mark_0 = src_data[itr_b+2]-1;
             for(int i = 0;i < dec_size;i++){
@@ -114,7 +113,6 @@ inline namespace UARTprotocol{
 
     template<typename T>
     int UARTDecoder::GetDecData(T& obj){
-        std::cout<<dec_size<<sizeof(obj)<<std::endl;
         if(sizeof(T) == dec_size){
             memcpy(&obj,dec_data,dec_size);
             return 0;
