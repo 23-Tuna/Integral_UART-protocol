@@ -1,3 +1,6 @@
+#ifndef UART_protocol_hpp
+#define UART_protocol_hpp
+
 #include <iostream>
 
 inline namespace UARTprotocol{
@@ -33,3 +36,5 @@ inline namespace UARTprotocol{
         size_t dec_size = 0;
     };
 }
+
+#endif
