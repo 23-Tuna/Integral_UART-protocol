@@ -1,28 +1,7 @@
-#include "UART_protocol.hpp"
+#include "UART_protocol.h"
 #include <cstring>
 
 inline namespace UARTprotocol{
-
-    template<typename T>
-    int UARTEncoder::SetRawData(T obj){
-        src_size = sizeof(obj);
-        if(src_size>256){
-            return -1;
-        }else{
-            memcpy(src_data,&obj,src_size);
-            return 0;
-        }
-    }
-
-    template<typename T>
-    int UARTEncoder::GetRawData(T& obj){
-        if(sizeof(T) == src_size){
-            memcpy(&obj,src_data,src_size);
-            return 0;
-        }else{
-            return -1;
-        }
-    }
 
     int UARTEncoder::Encode(){
         if(src_size+4>256){
@@ -109,15 +88,6 @@ inline namespace UARTprotocol{
             return 1;
         }
         return 0;
-    }
-
-    template<typename T>
-    int UARTDecoder::GetDecData(T& obj){
-        if(sizeof(T) == dec_size){
-            memcpy(&obj,dec_data,dec_size);
-            return 0;
-        }
-        return -1;
     }
 
     int UARTDecoder::DeInit(){

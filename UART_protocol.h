@@ -7,9 +7,24 @@ inline namespace UARTprotocol{
     class UARTEncoder{
         public:
         template<typename T>
-        int SetRawData(T);
+        int SetRawData(T obj){
+            src_size = sizeof(obj);
+            if(src_size>256){
+                return -1;
+            }else{
+                memcpy(src_data,&obj,src_size);
+                return 0;
+            }
+        }
         template<typename T>
-        int GetRawData(T&);
+        int GetRawData(T& obj){
+            if(sizeof(T) == src_size){
+                memcpy(&obj,src_data,src_size);
+                return 0;
+            }else{
+                return -1;
+            }
+        }
         int Encode();
         int GetByteData(uint8_t*,size_t);
 
@@ -25,7 +40,13 @@ inline namespace UARTprotocol{
         int SetByteData(uint8_t*,size_t);
         int Decode();
         template<typename T>
-        int GetDecData(T&);
+        int GetDecData(T& obj){
+            if(sizeof(T) == dec_size){
+                memcpy(&obj,dec_data,dec_size);
+                return 0;
+            }
+            return -1;
+        }
         int DeInit();
 
         private:
