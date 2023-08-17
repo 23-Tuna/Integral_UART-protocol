@@ -31,7 +31,7 @@ inline namespace UARTprotocol{
         int GetByteData(uint8_t*,size_t);
 
         template<typename T>
-        int SendData(UART& u,T obj,uint8_t adr){
+        int SendData(HardwareSerial& u,T obj,uint8_t adr){
             int status = 0;
             status = SetRawData(obj);
             if(!status)return status;
@@ -70,7 +70,7 @@ inline namespace UARTprotocol{
         int DeInit();
 
         template<typename T>
-        int RecvData(UART& u,T& obj){
+        int RecvData(HardwareSerial& u,T& obj){
             int status = 0;
             while(!status){
                 uint8_t buf[BUF_SIZE] = {0};
